@@ -282,8 +282,7 @@ function home(){
  const firstResources=RES.filter(resource=>resource.s==='legal').slice(0,4);
  const hardTasks=JOURNEY.flatMap(item=>item.tasks).filter(task=>task.obstacle&&task.resources?.some(id=>JOURNEY_RESOURCES[id])).slice(0,5);
  const languageLessonCount=Object.keys(LS).length;
- const stageRoute=stage=>`<span class="route-preview" aria-hidden="true"><span class="route-preview-copy">${e(stage.summary)}</span><span class="route-preview-dots">${stage.tasks.map(task=>`<i class="${taskState(task).status==='completed'?'done':''}"></i>`).join('')}</span>${(() => {const task=stage.tasks.find(item=>taskState(item).status!=='completed'&&taskState(item).status!=='skipped');return task?`<span class="route-preview-next">${e(task.title)}</span>`:''})()}</span>`;
- return `<section class="home-hero" aria-labelledby="home-title"><div class="hero-glow" aria-hidden="true"></div><svg class="hero-contours" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="none" stroke="white" stroke-width="1"><path d="M-80 120C180 20 340 240 580 120S980 15 1190 120s310 180 520 45"/><path d="M-80 175C180 75 340 295 580 175s400-105 610 0 310 180 520 45"/><path d="M-80 230C180 130 340 350 580 230s400-105 610 0 310 180 520 45"/><path d="M-80 285C180 185 340 405 580 285s400-105 610 0 310 180 520 45"/><path d="M-80 340C180 240 340 460 580 340s400-105 610 0 310 180 520 45"/><path d="M-80 395C180 295 340 515 580 395s400-105 610 0 310 180 520 45"/><path d="M-80 450C180 350 340 570 580 450s400-105 610 0 310 180 520 45"/></g></svg><div class="container hero-layout"><div class="hero-heading"><h1 id="home-title" class="home-display"><span class="line-mask"><span>${progress.completed?'Continue where you left off.':'Know your next step in the United States.'}</span></span></h1></div><div class="hero-intro"><div class="hero-copy"><p class="lead">Imminent breaks settling in into clear tasks. Each task links to trusted resources, English practice for that situation, and communities near you.</p><p class="hero-privacy">Educational prototype. Progress is saved in this browser only if you create a demo profile.</p></div><div class="hero-actions">${progress.completed?'<button class="btn" data-a="nav" data-v="journey">Continue your journey <span aria-hidden="true">→</span></button>':'<button class="btn" data-a="nav" data-v="journey">Start your journey <span aria-hidden="true">→</span></button>'}<button class="text-action" data-a="nav" data-v="imm">Find legal help <span aria-hidden="true">→</span></button></div></div><div class="hero-route" aria-label="Journey route" style="--stage-count:${JOURNEY.length};--route-progress:${routeProgress}"><div class="route-track" aria-hidden="true"><span class="route-track-fill"></span></div>${JOURNEY.map((stage,index)=>{const stats=stageProgress(stage),isCurrent=stage.id===currentStage.id,isComplete=stats.total>0&&stats.completed===stats.total,stageNext=stage.tasks.find(task=>taskState(task).status!=='completed'&&taskState(task).status!=='skipped');return `<button class="route-stop ${isCurrent?'current':''} ${isComplete?'complete':''} home-reveal" data-a="stageNav" data-stageid="${e(stage.id)}" style="--route-index:${index}" aria-label="${e(stage.title)} — ${stats.completed} of ${stats.total} tasks"><span class="route-flag-slot">${isCurrent?`<span class="route-here">${progress.completed?'You are here':'Start here'}</span>`:''}</span><span class="route-numeral">${String(index+1).padStart(2,'0')}</span><span class="route-node-slot"><span class="route-node" aria-hidden="true"><span class="route-node-core"></span></span></span><span class="route-label"><strong>${e(stage.title)}</strong><small>${stats.completed} of ${stats.total} tasks</small>${isCurrent&&stageNext?`<span class="route-next">Next: ${e(stageNext.title)}</span><span class="route-continue">Continue <i aria-hidden="true">→</i></span>`:''}</span>${stageRoute(stage)}</button>`}).join('')}</div><a class="hero-chevron" href="#stage-index" aria-label="Scroll to all journey stages"><span></span></a></div></section>
+ return `<section class="home-hero" aria-labelledby="home-title"><div class="hero-glow" aria-hidden="true"></div><svg class="hero-contours" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="none" stroke="white" stroke-width="1"><path d="M-80 120C180 20 340 240 580 120S980 15 1190 120s310 180 520 45"/><path d="M-80 175C180 75 340 295 580 175s400-105 610 0 310 180 520 45"/><path d="M-80 230C180 130 340 350 580 230s400-105 610 0 310 180 520 45"/><path d="M-80 285C180 185 340 405 580 285s400-105 610 0 310 180 520 45"/><path d="M-80 340C180 240 340 460 580 340s400-105 610 0 310 180 520 45"/><path d="M-80 395C180 295 340 515 580 395s400-105 610 0 310 180 520 45"/><path d="M-80 450C180 350 340 570 580 450s400-105 610 0 310 180 520 45"/></g></svg><div class="container hero-layout"><div class="hero-heading"><h1 id="home-title" class="home-display"><span class="line-mask"><span>${progress.completed?'Continue where you left off.':'Know your next step in the United States.'}</span></span></h1></div><div class="hero-intro"><div class="hero-copy"><p class="lead">Imminent breaks settling in into clear tasks. Each task links to trusted resources, English practice for that situation, and communities near you.</p><p class="hero-privacy">Educational prototype. Progress is saved in this browser only if you create a demo profile.</p></div><div class="hero-actions">${progress.completed?'<button class="btn" data-a="nav" data-v="journey">Continue your journey <span aria-hidden="true">→</span></button>':'<button class="btn" data-a="nav" data-v="journey">Start your journey <span aria-hidden="true">→</span></button>'}<button class="text-action" data-a="nav" data-v="imm">Find legal help <span aria-hidden="true">→</span></button></div></div><div class="hero-route" aria-label="Journey route" style="--stage-count:${JOURNEY.length};--route-progress:${routeProgress}"><div class="route-track" aria-hidden="true"><span class="route-track-fill"></span></div>${JOURNEY.map((stage,index)=>{const stats=stageProgress(stage),isCurrent=stage.id===currentStage.id,isComplete=stats.total>0&&stats.completed===stats.total,stageNext=stage.tasks.find(task=>taskState(task).status!=='completed'&&taskState(task).status!=='skipped');return `<button class="route-stop ${isCurrent?'current':''} ${isComplete?'complete':''} home-reveal" data-a="stageNav" data-stageid="${e(stage.id)}" style="--route-index:${index}" aria-label="${e(stage.title)} — ${stats.completed} of ${stats.total} tasks"><span class="route-flag-slot">${isCurrent?`<span class="route-here">${progress.completed?'You are here':'Start here'}</span>`:''}</span><span class="route-numeral">${String(index+1).padStart(2,'0')}</span><span class="route-node-slot"><span class="route-node" aria-hidden="true"><span class="route-node-core"></span></span></span><span class="route-label"><strong>${e(stage.title)}</strong><small>${stats.completed} of ${stats.total} tasks</small>${isCurrent&&stageNext?`<span class="route-next">Next: ${e(stageNext.title)}</span><span class="route-continue">Continue <i aria-hidden="true">→</i></span>`:''}</span></button>`}).join('')}</div><a class="hero-chevron" href="#stage-index" aria-label="Scroll to all journey stages"><span></span></a></div></section>
  <section class="stage-index" id="stage-index"><div class="container"><div class="stage-index-head"><h2>Every task has a way forward</h2></div><div class="stage-rows">${JOURNEY.map((stage,index)=>{const stats=stageProgress(stage),tasks=stage.tasks.slice(0,3);return `<article class="stage-index-item home-reveal" style="--reveal-index:${index}"><div class="stage-index-row" data-a="stageNav" data-stageid="${e(stage.id)}" data-stage-row aria-expanded="false"><span class="stage-index-num">${String(index+1).padStart(2,'0')}</span><span class="stage-index-name">${e(stage.title)}</span><span class="stage-index-count">${stats.completed}/${stats.total} tasks</span><button class="stage-index-arrow" data-a="stageNav" data-stageid="${e(stage.id)}" aria-label="Go to ${e(stage.title)}">→</button></div><div class="stage-index-details"><div class="stage-index-details-inner"><p>${e(stage.summary)}</p><div class="stage-index-tasks">${tasks.map(task=>`<button class="stage-task-link" data-a="openTask" data-taskid="${e(task.id)}"><i class="${taskState(task).status==='completed'?'done':''}"></i><span>${e(task.title)}</span><small>${e(task.time)}</small></button>`).join('')}</div><div class="stage-progress-dots" aria-label="${stats.completed} of ${stats.total} tasks complete">${stage.tasks.map(task=>`<i class="${taskState(task).status==='completed'?'done':''}"></i>`).join('')}</div></div></div></article>`}).join('')}</div></div></section>
  ${hardTasks.length?`<section class="hard-band"><div class="container"><h2>When a task gets hard</h2><div class="hard-layout"><div class="hard-task-list">${hardTasks.map((task,index)=>`<button class="hard-task ${index===0?'selected':''}" data-hard-task="${index}" aria-pressed="${index===0}">${e(task.title)}</button>`).join('')}</div><div class="hard-links">${hardTasks.map((task,index)=>`<div class="hard-resource-panel ${index===0?'selected':''}" data-hard-panel="${index}" aria-hidden="${index!==0}" ${index?'inert':''}><p>${e(task.obstacle.title)}</p>${task.resources.filter(id=>JOURNEY_RESOURCES[id]).slice(0,5).map(id=>`<a class="hard-row" href="${e(JOURNEY_RESOURCES[id].url)}" target="_blank" rel="noopener noreferrer"><small>Support</small><span>${e(JOURNEY_RESOURCES[id].name)}</span></a>`).join('')}</div>`).join('')}</div></div></div></section>`:''}
  <section class="support-bands"><div class="container"><article class="support-band immigration-band"><div><h2>Immigration Support</h2><button class="text-action" data-a="nav" data-v="imm">Go to Immigration Support <span aria-hidden="true">→</span></button></div><div>${firstResources.map(resource=>`<a class="support-resource" href="${e(resource.u)}" target="_blank" rel="noopener noreferrer"><span>${e(resource.t)}</span><small>${e(resource.org)}</small><i aria-hidden="true">→</i></a>`).join('')}</div></article>
@@ -335,13 +334,19 @@ function setupHomeEnhancements(){
  else prepareHeadline();
  const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
   if(entry.isIntersecting){entry.target.classList.add('is-visible');revealObserver.unobserve(entry.target)}
- }),{threshold:.2});
+ }),{threshold:.1});
  revealItems.forEach(item=>revealObserver.observe(item));
  const heroObserver=new IntersectionObserver(entries=>entries.forEach(entry=>hero.classList.toggle('is-visible',entry.isIntersecting)),{threshold:0});
  heroObserver.observe(hero);
  const glowTarget={x:hero.clientWidth*.7,y:hero.clientHeight*.3},glowCurrent={...glowTarget};
+ let heroRect={left:0,top:0};
+ const cacheHeroRect=()=>{heroRect=hero.getBoundingClientRect()};
+ cacheHeroRect();
+ if(typeof ResizeObserver==='function')new ResizeObserver(cacheHeroRect).observe(hero);
+ window.addEventListener('resize',cacheHeroRect,{passive:true});
  const updateGlow=()=>{
   pointerFrame=0;
+  if(document.hidden||!hero.classList.contains('is-visible'))return;
   glowCurrent.x+=(glowTarget.x-glowCurrent.x)*.08;
   glowCurrent.y+=(glowTarget.y-glowCurrent.y)*.08;
   hero.style.setProperty('--glow-x',`${glowCurrent.x}px`);
@@ -350,47 +355,97 @@ function setupHomeEnhancements(){
  };
  if(matchMedia('(hover:hover) and (pointer:fine)').matches){
   hero.addEventListener('pointermove',event=>{
-   const bounds=hero.getBoundingClientRect();
-   glowTarget.x=event.clientX-bounds.left;
-   glowTarget.y=event.clientY-bounds.top;
+   glowTarget.x=event.clientX-heroRect.left;
+   glowTarget.y=event.clientY-heroRect.top;
    if(!pointerFrame)pointerFrame=requestAnimationFrame(updateGlow);
   },{passive:true});
  }
  const index=document.querySelector('.stage-index'),rows=document.querySelector('.stage-rows');
+ let indexRect=null,rowsRect=null;
+ const cacheScrollRects=()=>{
+  indexRect=index?.getBoundingClientRect()||null;
+  rowsRect=rows?.getBoundingClientRect()||null;
+  stageItems.forEach(item=>item.style.setProperty('--item-top',`${item.offsetTop}px`));
+ };
+ cacheScrollRects();
+ if(typeof ResizeObserver==='function'&&rows)new ResizeObserver(cacheScrollRects).observe(rows);
+ window.addEventListener('resize',cacheScrollRects,{passive:true});
  const onScroll=()=>{
   if(scrollFrame)return;
   scrollFrame=requestAnimationFrame(()=>{
    scrollFrame=0;
-   const heroBounds=hero.getBoundingClientRect();
-   hero.classList.toggle('scrolled',heroBounds.top<-40);
-   if(heroBounds.bottom>0&&heroBounds.top<innerHeight)hero.style.setProperty('--parallax-y',`${Math.max(-120,Math.min(120,-heroBounds.top*.25))}px`);
+   const heroTop=hero.offsetTop-window.scrollY;
+   const heroBottom=heroTop+hero.offsetHeight;
+   hero.classList.toggle('scrolled',heroTop<-40);
+   if(heroBottom>0&&heroTop<innerHeight)hero.style.setProperty('--parallax-y',`${Math.max(-120,Math.min(120,-heroTop*.25))}px`);
    if(rows&&index){
-    const bounds=rows.getBoundingClientRect();
-    const travel=Math.max(1,bounds.height);
-    index.style.setProperty('--index-progress',`${Math.max(0,Math.min(1,(innerHeight*.55-bounds.top)/travel))}`);
+    const rowsTop=rows.offsetTop-window.scrollY;
+    const travel=Math.max(1,rows.offsetHeight);
+    index.style.setProperty('--index-progress',`${Math.max(0,Math.min(1,(innerHeight*.55-rowsTop)/travel))}`);
     const marker=innerHeight*.5;
     stageItems.forEach(item=>{
-     const rect=item.getBoundingClientRect();
-     item.classList.toggle('is-current',rect.top<=marker&&rect.bottom>=marker);
+     const top=item.offsetTop+rows.offsetTop-window.scrollY;
+     const bottom=top+item.offsetHeight;
+     item.classList.toggle('is-current',top<=marker&&bottom>=marker);
     });
    }
   });
  };
  window.addEventListener('scroll',onScroll,{passive:true});
  onScroll();
- const alignPreview=stop=>{
-  const preview=stop.querySelector('.route-preview');
-  if(!preview)return;
-  preview.classList.remove('align-right');
-  if(preview.getBoundingClientRect().right>innerWidth-16)preview.classList.add('align-right');
+ const preview=document.createElement('div');
+ preview.className='route-preview';
+ preview.setAttribute('role','tooltip');
+ preview.setAttribute('aria-hidden','true');
+ document.body.append(preview);
+ let previewStop=null,previewOpenTimer=0,previewCloseTimer=0;
+ const positionPreview=stop=>{
+  const node=stop.querySelector('.route-node-slot');
+  const nodeRect=node.getBoundingClientRect();
+  const width=264;
+  let left=nodeRect.left+nodeRect.width/2-width/2;
+  left=Math.max(16,Math.min(innerWidth-width-16,left));
+  const top=nodeRect.top-12-132;
+  preview.style.left=`${left}px`;
+  preview.style.top=`${Math.max(88,top)}px`;
+ };
+ const closePreview=()=>{
+  clearTimeout(previewOpenTimer);
+  previewCloseTimer=window.setTimeout(()=>{
+   preview.classList.remove('is-visible');
+   preview.setAttribute('aria-hidden','true');
+   previewStop=null;
+  },120);
+ };
+ const openPreview=(stop,immediate=false)=>{
+  clearTimeout(previewCloseTimer);
+  const open=()=>{
+   if(previewStop&&previewStop!==stop)preview.classList.remove('is-visible');
+   previewStop=stop;
+   const stops=[...document.querySelectorAll('.route-stop')];
+   const stage=stops.indexOf(stop);
+   const item=JOURNEY[stage];
+   if(!item)return;
+   const task=item.tasks.find(entry=>taskState(entry).status!=='completed'&&taskState(entry).status!=='skipped');
+   preview.innerHTML=`<span class="route-preview-copy">${e(item.summary)}</span><span class="route-preview-dots">${item.tasks.map(entry=>`<i class="${taskState(entry).status==='completed'?'done':''}"></i>`).join('')}</span>${task?`<span class="route-preview-next">${e(task.title)}</span>`:''}`;
+   positionPreview(stop);
+   preview.classList.add('is-visible');
+   preview.setAttribute('aria-hidden','false');
+  };
+  clearTimeout(previewOpenTimer);
+  if(immediate)open();else previewOpenTimer=window.setTimeout(open,70);
  };
  document.querySelectorAll('.route-stop').forEach(stop=>{
-  const preview=stop.querySelector('.route-preview');
-  stop.addEventListener('pointerenter',()=>{alignPreview(stop);preview?.setAttribute('aria-hidden','false')},{passive:true});
-  stop.addEventListener('pointerleave',()=>preview?.setAttribute('aria-hidden','true'),{passive:true});
-  stop.addEventListener('focus',()=>{alignPreview(stop);preview?.setAttribute('aria-hidden','false')});
-  stop.addEventListener('blur',()=>preview?.setAttribute('aria-hidden','true'));
+  if(matchMedia('(hover:hover) and (pointer:fine)').matches){
+   stop.addEventListener('pointerenter',()=>openPreview(stop));
+   stop.addEventListener('pointerleave',closePreview);
+  }
+  stop.addEventListener('pointerenter',()=>previewStop=stop,{passive:true});
+  stop.addEventListener('focus',()=>openPreview(stop,true));
+  stop.addEventListener('blur',closePreview);
  });
+ preview.addEventListener('pointerenter',()=>clearTimeout(previewCloseTimer));
+ preview.addEventListener('pointerleave',closePreview);
  document.addEventListener('click',event=>{
   if(event.target.closest('.stage-index-item'))return;
   document.querySelectorAll('.stage-index-item.is-expanded').forEach(item=>{
@@ -405,6 +460,14 @@ function setupHomeEnhancements(){
   }
  }));
  if(hardButtons.length){
+  let hardInteracted=false,hardVisible=false,hardIntent=0;
+  const panels=[...document.querySelectorAll('[data-hard-panel]')];
+  panels.forEach(panel=>panel.style.gridArea='1 / 1');
+  const hardLinks=document.querySelector('.hard-links');
+  if(hardLinks){
+   const height=Math.max(...panels.map(panel=>panel.scrollHeight));
+   hardLinks.style.setProperty('--hard-height',`${height}px`);
+  }
   const selectHard=index=>{
    activeHard=index;
    hardButtons.forEach((button,i)=>{
@@ -414,16 +477,35 @@ function setupHomeEnhancements(){
     if(panel){panel.classList.toggle('selected',selected);panel.inert=!selected;panel.setAttribute('aria-hidden',String(!selected))}
    });
   };
-  const stopHardAdvance=()=>{if(hardTimer){clearInterval(hardTimer);hardTimer=0}};
+  const stopHardAdvance=()=>{hardInteracted=true;if(hardTimer){clearInterval(hardTimer);hardTimer=0}};
+  const startHardAdvance=()=>{
+   if(hardInteracted||!hardVisible||hardTimer)return;
+   hardTimer=window.setInterval(()=>selectHard((activeHard+1)%hardButtons.length),6000);
+  };
   const hardSection=document.querySelector('.hard-band');
-  hardSection?.addEventListener('pointerenter',stopHardAdvance,{once:true,passive:true});
-  hardSection?.addEventListener('focusin',stopHardAdvance,{once:true});
+  if(typeof IntersectionObserver==='function'){
+   const hardObserver=new IntersectionObserver(entries=>{
+    hardVisible=entries[0]?.isIntersecting||false;
+    if(hardVisible)startHardAdvance();else stopHardAdvanceTimer();
+   },{threshold:.1});
+   hardObserver.observe(hardSection);
+  }
+  const stopHardAdvanceTimer=()=>{if(hardTimer){clearInterval(hardTimer);hardTimer=0}};
   hardButtons.forEach(button=>{
-   button.addEventListener('pointerenter',stopHardAdvance,{once:true});
-   button.addEventListener('focus',stopHardAdvance,{once:true});
+   button.addEventListener('pointerenter',()=>{
+    if(!matchMedia('(hover:hover) and (pointer:fine)').matches)return;
+    hardInteracted=true;
+    stopHardAdvanceTimer();
+    clearTimeout(hardIntent);
+    hardIntent=window.setTimeout(()=>{
+     selectHard(+button.dataset.hardTask);
+    },70);
+   },{passive:true});
+   button.addEventListener('pointerleave',()=>clearTimeout(hardIntent),{passive:true});
+   button.addEventListener('focus',()=>{stopHardAdvance();selectHard(+button.dataset.hardTask)});
    button.addEventListener('click',()=>{stopHardAdvance();selectHard(+button.dataset.hardTask)});
+   button.addEventListener('pointerdown',()=>stopHardAdvance(),{passive:true});
   });
-  hardTimer=window.setInterval(()=>selectHard((activeHard+1)%hardButtons.length),6000);
  }
 }
 function imm(){
@@ -501,20 +583,29 @@ function render(){
  const V={home,timeline,journey,imm,ice,lang,com,circle,acc};
  const primaryNav=['home','journey','imm','lang','com'];
  const page=S.page==='pron'?'lang':S.page;
+ const nextTask=nextJourneyTask();
+ const nextStage=nextTask?stageForTask(nextTask.id):null;
+ const progress=journeyProgress();
+ const continueCopy=nextTask?'Next:':'Next:';
+ const continueLabel=progress.completed?continueCopy:'Start';
+ const continueTitle=nextTask?.title||JOURNEY[0]?.tasks[0]?.title||'Your first task';
  const titles={home:'Imminent — Newcomer support and resources',timeline:'My Timeline — Imminent',journey:'My Journey — Imminent',imm:'Immigration Support — Imminent',ice:'ICE Information and Support — Imminent',lang:S.langView==='pron'?'Pronunciation Studio — Imminent':'Language Learning — Imminent',com:'Communities — Imminent',circle:'Community Circle — Imminent',acc:'Log In / Profile — Imminent'};
  document.documentElement.lang=S.lang;
  document.title=titles[S.page]||titles.home;
  document.body.classList.toggle('menu-open',S.menuOpen);
+ document.documentElement.classList.toggle('menu-open',S.menuOpen);
  $('#app').innerHTML=`<a class="skip" href="#main">Skip to content</a><div class="app"><header class="side site-header ${S.menuOpen?'menu-open':''}"><div class="header-inner">
- <button class="menu-toggle" data-a="menu" aria-expanded="${S.menuOpen}" aria-controls="main-nav"><span class="menu-lines" aria-hidden="true"><span class="menu-line"></span><span class="menu-line"></span><span class="menu-line"></span></span><span>Menu</span></button>
+ <button class="menu-toggle" data-a="menu" aria-label="${S.menuOpen?'Close menu':'Menu'}" aria-expanded="${S.menuOpen}" aria-controls="main-nav"><span class="menu-lines" aria-hidden="true"><span class="menu-line"></span><span class="menu-line"></span><span class="menu-line"></span></span><span>Menu</span></button>
  <button class="brand" data-a="nav" data-v="home" aria-label="Imminent home"><img class="brand-logo" src="assets/imminent-heart-logo.png" alt=""><span class="brand-name">Imminent</span></button>
  <button class="profile-toggle" data-a="nav" data-v="acc" aria-label="${e(navText('acc'))}" lang="${S.lang==='zh'?'zh-Hans':S.lang}">${S.name?'Profile':'Log In'}</button></div>
- <nav class="nav ${S.menuOpen?'is-open':''}" id="main-nav" aria-label="Main navigation" aria-hidden="${!S.menuOpen}" ${S.menuOpen?'':'inert'}><div class="nav-inner">
- <div class="nav-primary"><h2>Explore</h2>${primaryNav.map((k,index)=>`<button data-a="nav" data-v="${k}" class="nav-link ${page===k?'on':''}" ${page===k?'aria-current="page"':''} lang="${S.lang==='zh'?'zh-Hans':S.lang}"><span class="nav-number">${String(index+1).padStart(2,'0')}</span><span class="nav-label">${e(navText(k))}</span></button>`).join('')}</div>
- <div class="nav-tools"><div class="nav-group"><p class="nav-group-label">Quick help</p><button class="nav-link" data-a="nav" data-v="ice">${e(navText('ice'))}</button></div><div class="nav-group"><p class="nav-group-label">More</p><button class="nav-link" data-a="nav" data-v="timeline">${e(navText('timeline'))}</button><button class="nav-link" data-a="nav" data-v="circle">${e(navText('circle'))}</button></div><div class="nav-group"><p class="nav-group-label">Account</p><button class="nav-link" data-a="nav" data-v="acc">${S.name?'Profile':'Log In'}</button></div></div>
- <div class="nav-language"><h2>Language</h2>${Object.keys(T).map(k=>`<button data-a="footerLang" data-v="${k}" class="nav-language-option ${S.lang===k?'on':''}" lang="${k==='zh'?'zh-Hans':k}" ${S.lang===k?'aria-current="true"':''}>${T[k].n}</button>`).join('')}</div></div></nav>
+ <nav class="nav ${S.menuOpen?'is-open':''}" id="main-nav" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="${!S.menuOpen}" ${S.menuOpen?'':'inert'}>
+ <svg class="nav-contours" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="none" stroke="white" stroke-width="1"><path d="M-80 120C180 20 340 240 580 120S980 15 1190 120s310 180 520 45"/><path d="M-80 175C180 75 340 295 580 175s400-105 610 0 310 180 520 45"/><path d="M-80 230C180 130 340 350 580 230s400-105 610 0 310 180 520 45"/><path d="M-80 285C180 185 340 405 580 285s400-105 610 0 310 180 520 45"/><path d="M-80 340C180 240 340 460 580 340s400-105 610 0 310 180 520 45"/><path d="M-80 395C180 295 340 515 580 395s400-105 610 0 310 180 520 45"/></g></svg>
+ <div class="nav-inner">
+ <div class="nav-primary"><h2>Explore</h2>${primaryNav.map((k,index)=>`<button data-a="nav" data-v="${k}" class="nav-link ${page===k?'on':''}" style="--nav-index:${index}" ${page===k?'aria-current="page"':''} lang="${S.lang==='zh'?'zh-Hans':S.lang}"><span class="nav-route" aria-hidden="true"><span class="nav-route-node"></span></span><span class="nav-number">${String(index+1).padStart(2,'0')}</span><span class="nav-label">${e(navText(k))}</span><span class="nav-arrow" aria-hidden="true">→</span></button>`).join('')}</div>
+ <div class="nav-tools">${nextTask?`<div class="nav-continue" style="--progress:${progress.percent}%"><span class="nav-continue-label">${continueLabel}</span><h2 class="nav-continue-title">${e(continueTitle)}</h2><div class="nav-progress-copy">${progress.completed} of ${progress.total} tasks done</div><div class="nav-progress" role="progressbar" aria-label="Journey progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${progress.percent}"><i></i></div><button class="nav-continue-button" data-a="openTask" data-taskid="${e(nextTask.id)}">${progress.completed?'Continue':'Start'}</button></div>`:''}<div class="nav-group"><p class="nav-group-label">Quick help</p><button class="nav-link" data-a="nav" data-v="ice">${e(navText('ice'))}</button></div><div class="nav-group"><p class="nav-group-label">More</p><button class="nav-link ${page==='timeline'?'on':''}" data-a="nav" data-v="timeline">${e(navText('timeline'))}</button><button class="nav-link ${page==='circle'?'on':''}" data-a="nav" data-v="circle">${e(navText('circle'))}</button></div><div class="nav-group"><p class="nav-group-label">Account</p><button class="nav-link ${page==='acc'?'on':''}" data-a="nav" data-v="acc">${S.name?'Profile':'Log In'}</button></div></div>
+ <div class="nav-language"><h2>Language</h2>${Object.keys(T).map(k=>`<button data-a="footerLang" data-v="${k}" class="nav-language-option ${S.lang===k?'on':''}" lang="${k==='zh'?'zh-Hans':k}" ${S.lang===k?'aria-current="true"':''}>${T[k].n}</button>`).join('')}<span class="nav-language-note">Imminent is an educational prototype, not immigration or legal advice.</span></div></div></nav>
  </header>
- <main class="main" id="main" tabindex="-1"><div class="${S.page==='home'?'home-content':'wrap'}"><div class="warn" role="status" data-storage-warning style="${S.storageIssue?'':'display:none'}">${e(S.storageIssue)}</div>${S.lang!=='en'&&t('untr')?`<div class="warn translation-note" lang="${S.lang==='zh'?'zh-Hans':S.lang}">${e(t('untr'))}</div>`:''}${S.toast?`<div class="ok toast" role="status">${e(S.toast)} <button class="btn o s" data-a="x">Dismiss</button></div>`:''}${V[S.page]()}</div>${pageFooter()}</main></div>`;
+ <main class="main" id="main" tabindex="-1" ${S.menuOpen?'inert':''}><div class="${S.page==='home'?'home-content':'wrap'}"><div class="warn" role="status" data-storage-warning style="${S.storageIssue?'':'display:none'}">${e(S.storageIssue)}</div>${S.lang!=='en'&&t('untr')?`<div class="warn translation-note" lang="${S.lang==='zh'?'zh-Hans':S.lang}">${e(t('untr'))}</div>`:''}${S.toast?`<div class="ok toast" role="status">${e(S.toast)} <button class="btn o s" data-a="x">Dismiss</button></div>`:''}${V[S.page]()}</div>${pageFooter()}</main></div>`;
  document.documentElement.classList.add('js');
  if(S.page==='home')setupHomeEnhancements();
  if(S.page==='imm')applyImmigrationFilters();
@@ -524,8 +615,13 @@ function render(){
 const $=s=>document.querySelector(s);
 const go=(p,sub,hash='')=>{const page=sub==='pron'?'pron':p,url=PAGE_URL[page];if(url)location.href=url+(hash?'#'+encodeURIComponent(hash):'')};
 const toast=m=>{S.toast=m;render()};
+ const closeMenu=restoreFocus=>{
+  const nav=document.querySelector('#main-nav');
+  if(nav)nav.classList.add('is-closing');
+  window.setTimeout(()=>{S.menuOpen=false;render();if(restoreFocus)requestAnimationFrame(()=>document.querySelector('.menu-toggle')?.focus())},220);
+ };
 document.addEventListener('keydown',ev=>{
- if(ev.key==='Escape'&&S.menuOpen){S.menuOpen=false;render();requestAnimationFrame(()=>document.querySelector('.menu-toggle')?.focus());return}
+ if(ev.key==='Escape'&&S.menuOpen){closeMenu(true);return}
  if(ev.key==='Tab'&&S.menuOpen){
   const items=[...document.querySelectorAll('#main-nav button:not([disabled]), #main-nav summary, #main-nav select')].filter(item=>item.getClientRects().length);
   if(!items.length)return;
@@ -540,7 +636,7 @@ document.addEventListener('keydown',ev=>{
 */
 let rec,chunks=[];
 document.addEventListener('click',ev=>{const el=ev.target.closest('[data-a]');if(!el||el.tagName==='SELECT'||el.tagName==='INPUT'&&el.type!=='checkbox')return;const a=el.dataset.a,v=el.dataset.v;
-if(a==='menu'){S.menuOpen=!S.menuOpen;render();requestAnimationFrame(()=>document.querySelector(S.menuOpen?'#main-nav button[data-v]':'.menu-toggle')?.focus())}else if(a==='nav'){S.menuOpen=false;go(v,el.dataset.sub)}else if(a==='sub'){go(v==='pron'?'pron':'lang')}else if(a==='footerLang'){S.lang=v;try{localStorage.setItem('imminent-lang',v)}catch(err){}save();render()}else if(a==='toggleMore'){S.moreOpen=!S.moreOpen;render()}else if(a==='toggleStage'){S.openStage=v;render()}else if(a==='toggleTask'){S.openTask=S.openTask===el.dataset.taskid?'':el.dataset.taskid;render()}else if(a==='tmark'){S.done[v]=!S.done[v];save();render()}else if(a==='lv'){S.lv=v;S.done.level=true;S.pick=null;save();render()}else if(a==='cx'){S.cx=v;S.pick=null;render()}
+if(a==='menu'){if(S.menuOpen){closeMenu(true)}else{S.menuOpen=true;render();requestAnimationFrame(()=>document.querySelector('#main-nav .nav-primary .nav-link')?.focus())}}else if(a==='nav'){if(S.menuOpen){closeMenu(false);window.setTimeout(()=>go(v,el.dataset.sub),140)}else go(v,el.dataset.sub)}else if(a==='sub'){go(v==='pron'?'pron':'lang')}else if(a==='footerLang'){S.lang=v;try{localStorage.setItem('imminent-lang',v)}catch(err){}save();render();requestAnimationFrame(()=>document.querySelector('.nav-language-option.on')?.focus())}else if(a==='toggleMore'){S.moreOpen=!S.moreOpen;render()}else if(a==='toggleStage'){S.openStage=v;render()}else if(a==='toggleTask'){S.openTask=S.openTask===el.dataset.taskid?'':el.dataset.taskid;render()}else if(a==='tmark'){S.done[v]=!S.done[v];save();render()}else if(a==='lv'){S.lv=v;S.done.level=true;S.pick=null;save();render()}else if(a==='cx'){S.cx=v;S.pick=null;render()}
 else if(a==='pick'){if(+v===-1)S.pick=null;else if(S.pick===null){S.pick=+v;if(S.pick===lesson()[4]){S.ld[lk()]=1;S.done.english=true;save()}}render()}
 else if(a==='say'){if('speechSynthesis'in window){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(v);u.lang='en-US';u.rate=el.dataset.slow?.6:.9;speechSynthesis.speak(u)}else toast('Audio is not supported in this browser.')}
 else if(a==='save'){S.saved[v]=!S.saved[v];save();render()}else if(a==='compose'){S.compose=!S.compose;S.err='';render()}
@@ -584,7 +680,7 @@ document.addEventListener('click',ev=>{
   }
   S.openStage=el.dataset.stageid||'';
   go('journey',null,'stage-'+S.openStage);
- }else if(a==='openTask'&&id){S.openTask=id;const task=findTask(id);if(task){const stage=stageForTask(id);S.openStage=stage?.id||''}go('journey',null,'task-'+id)}
+ }else if(a==='openTask'&&id){S.openTask=id;const task=findTask(id);if(task){const stage=stageForTask(id);S.openStage=stage?.id||''}if(S.menuOpen){closeMenu(false);window.setTimeout(()=>go('journey',null,'task-'+id),140)}else go('journey',null,'task-'+id)}
  else if(a==='skipTask'&&id){S.journey[id]={...(S.journey[id]||{}),status:'skipped'};if(S.openTask===id)S.openTask='';save();render()}
  else if(a==='restoreTask'&&id){S.journey[id]={...(S.journey[id]||{}),status:'not-started'};save();render()}
  else if(a==='openFinder'){S.rfCategory=el.dataset.category||'All services';S.openTask='';save();go('journey',null,'resource-finder')}
